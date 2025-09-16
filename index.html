@@ -308,6 +308,39 @@
             list-style: none;
         }
 
+        /* New styles for founders photo */
+        .founders-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .founders-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .founders-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .founders-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            max-width: 500px;
+        }
+
         /* Additional styles for new elements */
         .innovation-chart {
             margin: 15px 0;
@@ -917,6 +950,10 @@
                 font-size: 2em;
                 bottom: 25%;
             }
+            
+            .founders-image {
+                max-width: 90%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -936,6 +973,10 @@
             .team-badge {
                 width: 80%;
                 text-align: center;
+            }
+            
+            .founders-image {
+                max-width: 100%;
             }
         }
 
@@ -1037,8 +1078,8 @@
                 <div class="wave"></div>
                 
                 <!-- Main title content -->
-                <h1 class="title-main">boAt Brand Analysis</h1>
-                <p class="title-sub">Consumer Electronics Market Leader</p>
+                <h1 class="title-main">boAt🎧</h1>
+                <p class="title-sub">Analysis of a Consumer Electronics brand</p>
                 
                 <!-- Team members -->
                 <div class="team-badges">
@@ -1046,13 +1087,12 @@
                     <div class="team-badge">Subasish Jena - 25DBA054</div>
                     <div class="team-badge">Aditya Nayak - 25DBA056</div>
                     <div class="team-badge">Nabin Gadaba - 25DBA043</div>
-                    <div class="team-badge">Prana Krishna Munda - 25DBA038</div>
                 </div>
                 
                 <!-- Presentation info -->
                 <div class="presentation-info">
                     <h3>Prepared for Strategic Business Analysis</h3>
-                    <p>Ravenshaw University, Cuttack | August 2025</p>
+                    <p>Ravenshaw University, Cuttack | September 2025</p>
                 </div>
             </div>
         </div>
@@ -1089,7 +1129,7 @@
             </div>
         </div>
 
-        <!-- Slide 3: Company Background -->
+        <!-- Slide 3: Company Background (with founders' photo) -->
         <div class="slide">
             <div class="slide-pattern pattern-grid"></div>
             <div class="slide-header">
@@ -1100,7 +1140,7 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <strong>2016:</strong> Founded by Aman Gupta and Sameer Mehta as Imagine Marketing
+                            <strong>2016:</strong> Founded by Aman Gupta and Sameer Mehta as Imagine Marketing ltd.
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -1125,6 +1165,23 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Founders Photo Section -->
+            <div class="content-section">
+                <div class="section-title">Leadership Team</div>
+                <div class="founders-container">
+                    <img src="https://mews.in/wp-content/uploads/2022/02/Aman-Gupta-_left_-and-Sameer-Mehta-Co-Founders-boAt-e1644263357365.jpg" 
+                         alt="boAt Founders - Aman Gupta and Sameer Mehta" 
+                         class="founders-image">
+                    <div class="founders-caption">
+                        Aman Gupta & Sameer Mehta - Co-founders of boAt
+                    </div>
+                </div>
+                <div class="content-box">
+                    <p>The visionary leadership behind boAt's success, combining expertise in consumer electronics and marketing to create India's leading audio brand.</p>
+                </div>
+            </div>
+            
             <div class="content-section">
                 <div class="section-title">Brand Philosophy</div>
                 <div class="content-box">
@@ -1683,6 +1740,8 @@
                             <strong>Prana Krishna Munda</strong><br>
                             <small>25DBA038</small>
                         </div>
+
+                       
                     </div>
                 </div>
             </div>
