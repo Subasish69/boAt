@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 sorry, my sunshine 🌸</title>
+  <!-- cute fonts & icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand:300,500,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- canvas-confetti for the crazy pop -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(145deg, #ffe6f0 0%, #ffd9e8 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* wrapper holds all content and relative positioning for floating elements */
+    .wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* floating hearts / stars container — crazy animation zone */
+    .floating-charms {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;  /* so they don't block clicks */
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .charm {
+      position: absolute;
+      user-select: none;
+      animation: floatAround 8s infinite ease-in-out;
+      opacity: 0.7;
+      filter: drop-shadow(0 5px 5px rgba(255, 120, 160, 0.2));
+      will-change: transform;
+    }
+
+    @keyframes floatAround {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+      25% {
+        transform: translate(12px, -18px) rotate(8deg) scale(1.05);
+      }
+      50% {
+        transform: translate(-8px, -25px) rotate(-5deg) scale(0.98);
+      }
+      75% {
+        transform: translate(-18px, -5px) rotate(3deg) scale(1.02);
+      }
+      100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+    }
+
+    /* main apology card — cute & glossy */
+    .apology-card {
+      position: relative;
+      z-index: 20;
+      max-width: 650px;
+      width: 100%;
+      background: rgba(255, 245, 250, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 70px 70px 70px 70px / 40px 40px 40px 40px;
+      box-shadow: 0 25px 40px rgba(245, 150, 180, 0.3),
+                  inset 0 0 30px rgba(255, 255, 255, 0.7);
+      padding: 2.5rem 2rem;
+      border: 3px solid white;
+      transition: transform 0.3s ease;
+      animation: cardGlow 4s infinite alternate;
+    }
+
+    .apology-card:hover {
+      transform: scale(1.01) translateY(-5px);
+    }
+
+    @keyframes cardGlow {
+      0% { box-shadow: 0 20px 40px rgba(255, 140, 200, 0.3), inset 0 0 20px #fff; }
+      100% { box-shadow: 0 30px 60px rgba(255, 80, 160, 0.5), inset 0 0 40px #ffe6f0; }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.6rem;
+      color: #c5476a;
+      text-shadow: 3px 3px 0 #ffc1cc;
+      margin-bottom: 0.25rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .heart-icon-big {
+      color: #ff4d6d;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 3px 3px #ffb3c6);
+      animation: heartbeat 1.3s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.2); }
+      50% { transform: scale(1.1); }
+      70% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    .cute-message {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #6d3b4e;
+      background: rgba(255, 230, 240, 0.7);
+      padding: 18px 20px;
+      border-radius: 60px 60px 60px 10px;
+      margin: 25px 0 20px;
+      border: 2px dashed #ff98a8;
+      line-height: 1.6;
+      box-shadow: 0 5px 0 #ffb6c1;
+    }
+
+    .compliment-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 18px;
+      margin: 25px 0 20px;
+    }
+
+    .compliment-item {
+      background: #ffe2ed;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      color: #aa4e6c;
+      box-shadow: 0 6px 0 #ffb0c3;
+      transition: all 0.2s;
+      border: 2px solid white;
+      font-size: 1.1rem;
+    }
+
+    .compliment-item i {
+      color: #ff4f79;
+      margin-right: 8px;
+    }
+
+    .compliment-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 0 #ff8da1;
+      background: #ffeef4;
+    }
+
+    .special-line {
+      font-size: 1.5rem;
+      font-family: 'Pacifico', cursive;
+      color: #b3416b;
+      background: #fff0f5;
+      padding: 12px 20px;
+      border-radius: 40px;
+      margin: 20px 0 15px;
+      border: 3px solid white;
+      box-shadow: 0 5px 0 #ffa5b9;
+    }
+
+    .special-line i {
+      color: #ffb3c6;
+      margin: 0 5px;
+    }
+
+    .hidden-love {
+      background: #fecfdf;
+      border-radius: 50px 50px 50px 10px;
+      padding: 1.5rem;
+      margin: 20px 0 15px;
+      border: 3px solid white;
+      color: #5e3747;
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: none;  /* initially hidden – appears on button click */
+      box-shadow: 0 8px 0 #ff859f;
+      animation: gentlePop 0.5s ease-out;
+    }
+
+    .hidden-love i {
+      color: #ff2a5e;
+      font-size: 1.5rem;
+      margin: 0 5px;
+    }
+
+    @keyframes gentlePop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .cute-btn {
+      background: linear-gradient(145deg, #ff9eb5, #ff7b9c);
+      border: none;
+      border-radius: 60px;
+      padding: 16px 32px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 2px 2px 0 #cb6e8b;
+      box-shadow: 0 10px 0 #a1435e, 0 5px 20px #ffb6c1;
+      cursor: pointer;
+      transition: all 0.1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 3px solid #fff5fa;
+    }
+
+    .cute-btn:active {
+      transform: translateY(8px);
+      box-shadow: 0 5px 0 #a1435e, 0 8px 15px #ffb6c1;
+    }
+
+    .cute-btn i {
+      font-size: 1.7rem;
+      filter: drop-shadow(0 2px 2px white);
+    }
+
+    .footer-note {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      color: #b34e71;
+      font-weight: 600;
+      background: #ffe3ed;
+      padding: 10px 20px;
+      border-radius: 99px;
+      display: inline-block;
+    }
+
+    .footer-note i {
+      color: #ff2a5e;
+      animation: wobble 2s infinite;
+    }
+
+    @keyframes wobble {
+      0%,100%{ transform: rotate(0deg); }
+      25%{ transform: rotate(10deg); }
+      75%{ transform: rotate(-10deg); }
+    }
+
+    /* small responsive */
+    @media (max-width: 550px) {
+      h1 { font-size: 2rem; }
+      .cute-message { font-size: 1.1rem; }
+      .special-line { font-size: 1.3rem; }
+      .cute-btn { font-size: 1.2rem; padding: 14px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <!-- container for floating hearts/stars (JS injected) -->
+  <div class="floating-charms" id="floatingCharms"></div>
+
+  <!-- main cute apology card -->
+  <div class="apology-card">
+    <h1>
+      <i class="fas fa-heart heart-icon-big"></i>
+      for my princess
+      <i class="fas fa-heart heart-icon-big"></i>
+    </h1>
+
+    <!-- core apology with compliments -->
+    <div class="cute-message">
+      <i class="fas fa-laugh-squint" style="color:#ff6f91; margin-right:8px;"></i>
+      I'm truly sorry for our misunderstanding, my love.<br>
+      You're the most <strong>beautiful, smart & caring</strong> person ever.
+      <i class="fas fa-star" style="color:#f7c35c; margin-left:8px;"></i>
+    </div>
+
+    <!-- compliment tags (pampering overload) -->
+    <div class="compliment-grid">
+      <span class="compliment-item"><i class="fas fa-heart"></i> gorgeous smile</span>
+      <span class="compliment-item"><i class="fas fa-star"></i> brilliant mind</span>
+      <span class="compliment-item"><i class="fas fa-kiss-wink-heart"></i> adorable laugh</span>
+      <span class="compliment-item"><i class="fas fa-sun"></i> my sunshine</span>
+      <span class="compliment-item"><i class="fas fa-gem"></i> one in a million</span>
+      <span class="compliment-item"><i class="fas fa-crown"></i> queen energy</span>
+    </div>
+
+    <!-- "leave it and go ahead" line, with cute spin -->
+    <div class="special-line">
+      <i class="fas fa-dove"></i> let's leave the misunderstanding behind <br> and move ahead together, hand in hand <i class="fas fa-hand-holding-heart"></i>
+    </div>
+
+    <!-- hidden extra pampering (will be revealed) -->
+    <div id="extraLoveMessage" class="hidden-love">
+      <i class="fas fa-heart" style="color:#ff0055;"></i>
+      You're the reason i believe in fairy tales.  <br>
+      Your eyes sparkle like a thousand stars, <br>
+      and i never want to make them sad. <br>
+      <span style="font-size:1.5rem;">💖 i'm sorry, baby 💖</span>
+      <i class="fas fa-heart" style="color:#ff0055;"></i>
+    </div>
+
+    <!-- interactive buttons -->
+    <div class="button-group">
+      <button class="cute-btn" id="showerLoveBtn">
+        <i class="fas fa-cloud-meatball"></i> shower with love
+      </button>
+      <button class="cute-btn" id="forgiveBtn">
+        <i class="fas fa-check-circle"></i> forgive me? 💘
+      </button>
+    </div>
+
+    <!-- cute footer note -->
+    <div class="footer-note">
+      <i class="fas fa-heart"></i> obsessed with you · forever yours <i class="fas fa-heart"></i>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // --- FLOATING CHARMS GENERATOR (crazy hearts & stars) ---
+    const charmContainer = document.getElementById('floatingCharms');
+    const TOTAL_CHARMS = 45;  // nice amount
+
+    // icon pool: mostly hearts, some stars, kiss marks, etc.
+    const icons = [
+      'fa-heart', 'fa-heart', 'fa-heart', 'fa-heart', 'fa-heart',
+      'fa-star', 'fa-star', 'fa-star',
+      'fa-kiss-wink-heart', 'fa-sparkles', 'fa-heart', 'fa-crown',
+      'fa-heart', 'fa-heart', 'fa-heart', 'fa-star', 'fa-heart',
+      'fa-heart', 'fa-star', 'fa-heart', 'fa-heart', 'fa-gem'
+    ];
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    for (let i = 0; i < TOTAL_CHARMS; i++) {
+      const charm = document.createElement('div');
+      charm.className = 'charm';
+
+      // pick random icon from list
+      const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+      // random color – pink/red/purple spectrum
+      const hue = random(320, 20); // 320-360 (pink/purple) and 0-20 (red)
+      const sat = random(70, 95);
+      const light = random(60, 80);
+      const color = `hsl(${hue}, ${sat}%, ${light}%)`;
+
+      charm.innerHTML = `<i class="fas ${randomIcon}" style="color: ${color};"></i>`;
+
+      // random position (cover whole wrapper)
+      charm.style.left = random(0, 100) + '%';
+      charm.style.top = random(0, 100) + '%';
+
+      // random size
+      const size = random(1.2, 3.8);
+      charm.style.fontSize = size + 'rem';
+
+      // random animation duration (6s to 22s) and delay
+      const duration = random(6, 22);
+      const delay = random(-5, 5); // negative so they start mid-way
+      charm.style.animation = `floatAround ${duration}s infinite ease-in-out`;
+      charm.style.animationDelay = delay + 's';
+
+      // slight opacity variation
+      charm.style.opacity = random(0.4, 0.8);
+
+      charmContainer.appendChild(charm);
+    }
+
+    // --- CONFETTI + REVEAL EXTRA LOVE ---
+    const showerBtn = document.getElementById('showerLoveBtn');
+    const forgiveBtn = document.getElementById('forgiveBtn');
+    const extraDiv = document.getElementById('extraLoveMessage');
+
+    // function to launch crazy confetti (multiple bursts)
+    function launchConfettiBurst() {
+      // main burst
+      confetti({
+        particleCount: 120,
+        spread: 100,
+        origin: { y: 0.6, x: 0.5 },
+        startVelocity: 25,
+        colors: ['#ff8cba', '#ffb3c6', '#ffe6f0', '#ff4d6d', '#f7c35c']
+      });
+      // left side
+      setTimeout(() => {
+        confetti({
+          particleCount: 70,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.7 },
+          colors: ['#f9acbc', '#ffd1dc', '#c4a3ff']
+        });
+      }, 150);
+      // right side
+      setTimeout(() => {
+        confetti({
+          particleCount: 70,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.7 },
+          colors: ['#f9acbc', '#ffd1dc', '#c4a3ff']
+        });
+      }, 300);
+      // extra random pop after 500ms
+      setTimeout(() => {
+        confetti({
+          particleCount: 150,
+          spread: 90,
+          origin: { y: 0.5, x: 0.5 },
+          colors: ['#ff6f91', '#ffc8dd', '#b5ead7', '#ffb347']
+        });
+      }, 500);
+    }
+
+    // shower button: reveal hidden message + confetti
+    showerBtn.addEventListener('click', function() {
+      // show the hidden love message (if hidden)
+      if (extraDiv.style.display === 'none' || !extraDiv.style.display) {
+        extraDiv.style.display = 'block';
+      } else {
+        // if already visible, we can add a little pulse effect
+        extraDiv.style.animation = 'none';
+        extraDiv.offsetHeight; // reflow
+        extraDiv.style.animation = 'gentlePop 0.5s ease-out';
+      }
+      // confetti extravaganza
+      launchConfettiBurst();
+
+      // optional tiny change on button (just for fun)
+      showerBtn.innerHTML = '<i class="fas fa-cloud-rain"></i> love showered! 💦';
+      setTimeout(() => {
+        showerBtn.innerHTML = '<i class="fas fa-cloud-meatball"></i> shower with love';
+      }, 2000);
+    });
+
+    // forgive button: also confetti + hide/show extra compliments if not shown
+    forgiveBtn.addEventListener('click', function() {
+      // show extra message if not visible (because it's part of pampering)
+      if (extraDiv.style.display === 'none' || !extraDiv.style.display) {
+        extraDiv.style.display = 'block';
+      } else {
+        // even if visible, trigger little heart pop
+        extraDiv.style.transform = 'scale(1.02)';
+        setTimeout(() => extraDiv.style.transform = 'scale(1)', 150);
+      }
+
+      // confetti with heart theme (more pink)
+      confetti({
+        particleCount: 200,
+        spread: 70,
+        origin: { y: 0.5 },
+        colors: ['#ff4d6d', '#ffb3c6', '#fbc4d5', '#ffffff']
+      });
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          spread: 130,
+          origin: { y: 0.5, x: 0.3 },
+          colors: ['#fba0b5', '#fb6f92']
+        });
+      }, 200);
+
+      // change button text temporarily
+      forgiveBtn.innerHTML = '<i class="fas fa-heart"></i> you are forgiven! 💕';
+      setTimeout(() => {
+        forgiveBtn.innerHTML = '<i class="fas fa-check-circle"></i> forgive me? 💘';
+      }, 2000);
+    });
+
+    // also if the user clicks anywhere on the card, maybe a tiny spark? optional
+    // but we keep it simple.
+
+    // make the hidden message initially hidden (already hidden via CSS)
+    // but ensure it's hidden if style not set inline
+    extraDiv.style.display = 'none'; // explicitly hide
+
+    // Bonus: click on any compliment item triggers tiny heart reaction
+    const compliments = document.querySelectorAll('.compliment-item');
+    compliments.forEach(item => {
+      item.addEventListener('click', function(e) {
+        // mini confetti pop
+        confetti({
+          particleCount: 25,
+          spread: 35,
+          origin: { y: 0.7, x: e.clientX / window.innerWidth },
+          colors: ['#ffb3ba', '#ffdfb3', '#baffc9']
+        });
+        // add a little bounce effect
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => this.style.transform = '', 150);
+      });
+    });
+
+    // make sure floating hearts never block clicks (already pointer-events: none)
+  })();
+</script>
+<!-- a little extra style for any inline touch -->
+<style>
+  /* just to ensure floating charms don't overlay text in a weird way */
+  .apology-card * {
+    position: relative;
+    z-index: 5;
+  }
+  .fa-heart, .fa-star { transition: all 0.2s; }
+  .floating-charms i {
+    filter: drop-shadow(0 5px 5px rgba(255, 150, 180, 0.4));
+  }
+</style>
+</body>
+</html>
